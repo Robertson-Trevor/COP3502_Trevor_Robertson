@@ -9,9 +9,14 @@ def menu():
 def encode(string):
     encoded_string = ""
     for num in string:
-        encoded_string = encoded_string + str(int(num) + 3)
+        encoded_string = encoded_string + str((int(num) + 3) % 10)
     return encoded_string
 
+def decode(string):
+    decoded_list = [(int(string[i]) - 3) % 10 for i in range(len(string))]  # create list and subtract 3 from each element
+    decoded_string = [str(element) for element in decoded_list]  # conv each element into str
+    decoded_string = ''.join(decoded_string)
+    return decoded_string
 
 def main():
     cont = True
@@ -23,7 +28,8 @@ def main():
             encoded_string = encode(string)
             print("Your password has been encoded and stored!")
         elif option == 2:
-            print(f"The encoded password is {encoded_string}, and the original password is {string}")
+            decoded_string = decode(encoded_string)
+            print(f"The encoded password is {encoded_string}, and the original password is {decoded_string}")
         elif option == 3:
             cont = False
 
